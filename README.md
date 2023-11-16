@@ -6,7 +6,8 @@ This package has the intent to be used in two places:
 - In the DSF crowdfunding web-aplication. A micro-site just to show the crowdfunding.
 
 # Integrations how-to-do
-* See the `README` how to integrate with mercado pago rest api by [clicking here](https://github.com/igormidev/dsfcrowdfunding.github.io/blob/master/docs/PIX_INTEGRATION_README.md)
+* See the `README` about how the full comunication between app-api's will work in a sequence diagram by [clicking here](https://github.com/igormidev/dsfcrowdfunding.github.io/blob/master/docs/API_INTEGRATION_README.md)
+* See the `README` about how to integrate with mercado pago rest api by [clicking here](https://github.com/igormidev/dsfcrowdfunding.github.io/blob/master/docs/PIX_INTEGRATION_README.md)
 
 # How to use package in a flutter project
 

@@ -105,7 +105,7 @@ curl --request POST \
 }'
 ```
 
-> You can se a example of a response of this url by [clicking here](https://github.com/igormidev/dsfcrowdfunding.github.io/blob/master/docs/json_examples/create_pix_intent_example.json)
+> You can se a example of a response of this url by [clicking here](https://github.com/igormidev/dsfcrowdfunding.github.io/blob/master/docs/json_examples/pix_payment_check_example.json)
 
 ## Backend-frontend integration proposal
 We can create a POST route like, for example:<br>
