@@ -1,4 +1,6 @@
 import 'dart:io';
+import 'package:dsfcrowdfunding/src/ui/widgets/about_player_tile.dart';
+import 'package:dsfcrowdfunding/src/ui/widgets/hightlights_section.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_svg/svg.dart';
@@ -33,15 +35,15 @@ class CrowdfundingPage extends StatelessWidget {
             if (hasError) {
               return const Center(
                 child: SizedBox(
-                  height: 220,
-                  width: 320,
+                  height: 260,
+                  width: 380,
                   child: Center(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Icon(
                           Icons.error_outline_rounded,
-                          size: 42,
+                          size: 122,
                           color: Color(0xffFF4A01),
                         ),
                         SizedBox(height: 16),
@@ -187,9 +189,8 @@ class _CrowdfundingWidget extends StatelessWidget {
           child: CardOfProduct(),
         ),
         const SizedBox(height: 16),
-        // const AboutPlayer(),
-        // const HightlightsSection(),
-        // const SizedBox(height: 16),
+        const AboutPlayer(),
+        const HightlightsSection(),
         const GradientDivider(),
         const SizedBox(height: 8),
         const Padding(

@@ -55,61 +55,67 @@ class HighlightsVideo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
-      child: Material(
-        color: Colors.transparent,
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(30),
-            color: const Color(0xff1E1D1D),
-          ),
-          // padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              ClipRRect(
-                borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(30),
-                  topRight: Radius.circular(30),
-                ),
-                child: AspectRatio(
-                  aspectRatio: 16 / 9,
-                  child: DsfVideoPlayer.fromNetwork(
-                    key: keyForPlayer,
-                    networkVideo: video,
-                    titleForAnalytics: title,
-                    postIdForAnalytics: postId,
-                    autoPlay: autoPlay,
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(
+          maxWidth: 500,
+        ),
+        child: Material(
+          color: Colors.transparent,
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(30),
+              color: const Color(0xff1E1D1D),
+            ),
+            // padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                ClipRRect(
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(30),
+                    topRight: Radius.circular(30),
+                  ),
+                  child: AspectRatio(
+                    aspectRatio: 16 / 9,
+                    // child: ColoredBox(color: Colors.green),
+                    child: DsfVideoPlayer.fromNetwork(
+                      key: keyForPlayer,
+                      networkVideo: video,
+                      titleForAnalytics: title,
+                      postIdForAnalytics: postId,
+                      autoPlay: autoPlay,
+                    ),
                   ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    if (subTitle.isNotEmpty)
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      if (subTitle.isNotEmpty)
+                        Text(
+                          subTitle,
+                          style: Theme.of(context).textTheme.bodySmall,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      const SizedBox(height: 14),
                       Text(
-                        subTitle,
-                        style: Theme.of(context).textTheme.bodySmall,
+                        title,
+                        style: Theme.of(context).textTheme.titleSmall,
                         maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
                       ),
-                    const SizedBox(height: 14),
-                    Text(
-                      title,
-                      style: Theme.of(context).textTheme.titleSmall,
-                      maxLines: 2,
-                    ),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: actions,
-                    ),
-                  ],
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: actions,
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              const SizedBox(height: 16),
-            ],
+                const SizedBox(height: 16),
+              ],
+            ),
           ),
         ),
       ),

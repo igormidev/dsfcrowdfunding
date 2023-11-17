@@ -5,6 +5,7 @@ import 'package:dsfcrowdfunding/src/helpers/formaters.dart';
 import 'package:dsfcrowdfunding/src/models/user_post.dart';
 import 'package:dsfcrowdfunding/src/theme/shared_widgets/box.dart';
 import 'package:dsfcrowdfunding/src/ui/highlights_video.dart';
+import 'package:image_network/image_network.dart';
 import 'package:provider/provider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
@@ -94,14 +95,15 @@ class UserHighlights extends StatelessWidget {
         height: 220,
         child: ListView.separated(
           scrollDirection: Axis.horizontal,
-          itemCount: posts.length + 1,
+          itemCount: posts.length + 2,
           separatorBuilder: (context, index) => const SizedBox(width: 16),
           itemBuilder: (BuildContext context, int index) {
-            if (index == posts.length) {
-              return const SizedBox(width: 180);
+            if (index == 0 || index == posts.length + 1) {
+              return const SizedBox(width: 16);
             }
 
-            final UserPost post = posts[index];
+            final UserPost post = posts[index - 1];
+            final image = post.thumb.toString();
             return AspectRatio(
               aspectRatio: 16 / 11,
               child: Column(
@@ -118,17 +120,22 @@ class UserHighlights extends StatelessWidget {
                         ),
                         child: Stack(
                           children: [
-                            Positioned.fill(
-                              child: CachedNetworkImage(
-                                fit: BoxFit.contain,
-                                imageUrl: post.thumb.toString(),
-                                errorWidget: (_, __, dynamic error) {
-                                  return ColoredBox(
-                                    color: theme.scaffoldBackgroundColor,
-                                  );
-                                },
-                              ),
-                            ),
+                            Positioned.fill(child: LayoutBuilder(
+                              builder: (context, box) {
+                                final width = box.maxWidth;
+                                final height = box.maxHeight;
+                                return ImageNetwork(
+                                  image: image,
+                                  width: width,
+                                  height: height,
+                                  fitAndroidIos: BoxFit.cover,
+                                  fitWeb: BoxFitWeb.cover,
+                                  // borderRadius: BorderRadius.circular(60),
+                                  onLoading: const CircularProgressIndicator
+                                      .adaptive(),
+                                );
+                              },
+                            )),
                             Positioned.fill(
                               top: 60,
                               child: Container(
