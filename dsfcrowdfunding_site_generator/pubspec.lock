@@ -182,7 +182,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: dfef51f4a7077be1f2ee63ad19df506f352d8ddd
+      resolved-ref: ff8538939b761ca288d20f09f856263d9de735b1
       url: "https://github.com/igormidev/dsfcrowdfunding.git"
     source: git
     version: "0.0.1"
@@ -806,6 +806,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.2"
+  video_player_web_hls:
+    dependency: transitive
+    description:
+      name: video_player_web_hls
+      sha256: "278c7841a2450d1b1ad2a2eb746840045b07e5d2ad21663c84a1486925ed338b"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.0"
   visibility_detector:
     dependency: transitive
     description:
