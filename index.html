@@ -34,7 +34,7 @@
 
   <script>
     // The value below is injected by flutter build, do not touch.
-    const serviceWorkerVersion = "99186766";
+    const serviceWorkerVersion = "1260038300";
   </script>
   <!-- This script adds the flutter initialization JS code -->
   <script src="flutter.js" defer></script>
@@ -55,7 +55,40 @@
       });
     });
   </script>
-  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"  type="application/javascript"></script>
-  <script src="main.dart.js" type="application/javascript"></script>
+  <script>
+    function replaceUrl(url) {
+      history.replaceState(null, "", url);
+    }
+    function playHls(id, videoSrc) {
+      var video = document.getElementById("video");
+      if (video == null) {
+        return;
+      }
+      if (video.canPlayType("application/vnd.apple.mpegurl")) {
+        video.src = videoSrc;
+        video.addEventListener("loadedmetadata", function () {
+          video.volume = 0.3;
+        });
+      } else if (Hls.isSupported()) {
+        var hls = new Hls();
+        hls.loadSource(videoSrc);
+        hls.attachMedia(video);
+        hls.on(Hls.Events.MANIFEST_PARSED, function () {
+          video.volume = 0.3;
+        });
+      } else {
+        console.error("HLS is not supported");
+        alert("HLS is not supported");
+      }
+    } 
+    function playBlob(id, videoSrc) {
+      var video = document.shadowRoot.getElementById("video");
+      if (video == null) {
+        return;
+      }
+      var url = URL.createObjectURL(videoSrc);
+      video.src = url;
+    }
+  </script>
 </body>
 </html>
