@@ -38,3 +38,50 @@ But that web folder needs to be inside the root folder.
 So you can drag all content inside build/web to the root of this branch.
 
 After that, just commit the changes and wait 5 minutes and a new version of the website will be availible.
+
+# HTML Video loader configuration
+In order to run m3U8 video type in flutter web we need to do some configurations.
+Those configurations are `already done` in `dsfcrowdfunding_site_generator`. 
+But I am writing a documentation here about how to it.
+
+Inside the root of the flutter project, look for `/web`.
+Then, open `index.html` file.
+In the body section, you can add scripts.
+Add the following script *as the last script of body section*:
+```dart
+<script>
+function replaceUrl(url) {
+  history.replaceState(null, "", url);
+}
+function playHls(id, videoSrc) {
+  var video = document.getElementById("video");
+  if (video == null) {
+    return;
+  }
+  if (video.canPlayType("application/vnd.apple.mpegurl")) {
+    video.src = videoSrc;
+    video.addEventListener("loadedmetadata", function () {
+      video.volume = 0.3;
+    });
+  } else if (Hls.isSupported()) {
+    var hls = new Hls();
+    hls.loadSource(videoSrc);
+    hls.attachMedia(video);
+    hls.on(Hls.Events.MANIFEST_PARSED, function () {
+      video.volume = 0.3;
+    });
+  } else {
+    console.error("HLS is not supported");
+    alert("HLS is not supported");
+  }
+} 
+function playBlob(id, videoSrc) {
+  var video = document.shadowRoot.getElementById("video");
+  if (video == null) {
+    return;
+  }
+  var url = URL.createObjectURL(videoSrc);
+  video.src = url;
+}
+</script> 
+```
